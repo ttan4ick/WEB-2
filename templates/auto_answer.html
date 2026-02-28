@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% set translations = {
+        'surname': 'Фамилия',
+        'name': 'Имя',
+        'education': 'Образование',
+        'sex': 'Пол',
+        'motivation': 'Мотивация',
+        'professions': 'Профессии',
+        'stay': 'Готовы остаться на Марсе'
+    } %}
+    {% for key, value in data.items() %}
+        <h4>{{translations[key]}}: {{value}}</h4>
+    {% endfor %}
+{% endblock %}
