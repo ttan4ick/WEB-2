@@ -112,5 +112,29 @@ def table(sex, age):
     return render_template("table.html", title="Цвет каюты", sex=sex, age=age)
 
 
+landscapes = [
+    "img/mars_landscape1.jpg",
+    "img/mars_landscape2.jpg",
+    "img/mars_landscape3.jpg",
+]
+
+
+@app.route("/galery", methods=["GET", "POST"])
+def galery():
+    if request.method == "GET":
+        return render_template(
+            "galery.html", title="Красная планета", landscapes=landscapes
+        )
+
+    elif request.method == "POST":
+        file = request.files["file"]
+        filepath = f"static/img/mars_landscape{len(landscapes) + 1}.jpg"
+        file.save(filepath)
+        landscapes.append(f"img/mars_landscape{len(landscapes) + 1}.jpg")
+        return render_template(
+            "galery.html", title="Красная планета", landscapes=landscapes
+        )
+
+
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
