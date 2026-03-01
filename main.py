@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from src.loginform import LoginForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config["SECRET_KEY"] = "yandexlyceum_secret_key"
 
 
 @app.route("/")
@@ -84,12 +84,27 @@ def astronaut_selection():
         return render_template("auto_answer.html", title="Анкета", data=data)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return 'Запрос успешно отправлен'
-    return render_template('login.html', title='Аварийный доступ', form=form)
+        return "Запрос успешно отправлен"
+    return render_template("login.html", title="Аварийный доступ", form=form)
+
+
+@app.route("/distribution")
+def distribution():
+    astronauts = [
+        "Ридли Скотт",
+        "Энди Уир",
+        "Марк Уотни",
+        "Венката Капур",
+        "Тедди Сандерс",
+        "Шон Бин",
+    ]
+    return render_template(
+        "distribution.html", title="Размещение по каютам", astronauts=astronauts
+    )
 
 
 if __name__ == "__main__":
