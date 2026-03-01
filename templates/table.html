@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Оформление каюты</h2>
+    {% set color = "white" %}
+    {% set filename = "" %}
+    {% if sex == "female" and age > "21" %}
+        {% set color = "#FF6347" %}
+        {% set filename = "adult.png" %}
+    {% elif sex == "female" and age < "21" %}
+        {% set color = "#FFDAB9" %}
+        {% set filename = "child.png" %}
+    {% elif sex == "male" and age > "21" %}
+        {% set color = "#4682B4" %}
+        {% set filename = "adult.png" %}
+    {% elif sex == "male" and age < "21" %}
+        {% set color = "#B0E0E6" %}
+        {% set filename = "child.png" %}
+    {% endif %}
+    <table>
+        <tr>
+            <td>Цвет стен</td>
+            <td>Эмблема</td>
+        </tr>
+        <tr>
+            <td bgcolor={{ color }}></td>
+            <td>
+                <img src="{{ url_for('static', filename='img/' + filename) }}" 
+                alt="Эмблема">
+            </td>
+        </tr>
+    </table>
+{% endblock %}
